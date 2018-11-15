@@ -3,6 +3,12 @@
   "env": {
     "production": {
       "plugins": ["react-native-paper/babel"]
-    }
+    },
+    "development": {
+      "plugins": [
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ["import", { "libraryName": "antd-mobile-rn" }]
+      ]
+    } 
   }
 }
