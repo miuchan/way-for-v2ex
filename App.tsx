@@ -143,48 +143,43 @@ export default class App extends Component<State> {
       selectedTab: tabName,
     })
   }
-
+  renderTabBarItem() {
+    const items = [
+      { 
+        tabName: '探索',
+        icon: require('./assets/images/explore.png'),
+        selectedIcon: require('./assets/images/explore-selected.png'),
+      },
+      { 
+        tabName: '热门',
+        icon: require('./assets/images/hot.png'),
+        selectedIcon: require('./assets/images/hot-selected.png'),
+      },
+      { 
+        tabName: '我的',
+        icon: require('./assets/images/me.png'),
+        selectedIcon: require('./assets/images/me-selected.png'),
+      },
+    ]
+    return items.map(item => (
+      <TabBar.Item
+        title={item.tabName}
+        key={item.tabName}
+        icon={item.icon}
+        selectedIcon={item.selectedIcon}
+        selected={this.state.selectedTab === item.tabName}
+        onPress={() => this.onChangeTab(item.tabName)}
+      >
+        {this.state.selectedTab === item.tabName && this.renderContent(item.tabName)}
+      </TabBar.Item>
+      )
+    )
+  }
   render() {
     return (
       <Provider {...store}>
         <TabBar>
-          <TabBar.Item
-            title="Life"
-            icon={require('./assets/images/explore.png')}
-            selectedIcon={require('./assets/images/explore-selected.png')}
-            selected={this.state.selectedTab === 'blueTab'}
-            onPress={() => this.onChangeTab('blueTab')}
-          >
-            {this.state.selectedTab === 'blueTab' && this.renderContent('Life Tab')}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={require('./assets/images/hot.png')}
-            selectedIcon={require('./assets/images/hot-selected.png')}
-            title="Koubei"
-            badge={2}
-            selected={this.state.selectedTab === 'redTab'}
-            onPress={() => this.onChangeTab('redTab')}
-          >
-            {this.state.selectedTab === 'redTab' && <Text>red tab</Text>}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={require('./assets/images/explore.png')}
-            selectedIcon={require('./assets/images/explore.png')}
-            title="Friend"
-            selected={this.state.selectedTab === 'greenTab'}
-            onPress={() => this.onChangeTab('greenTab')}
-          >
-            {this.state.selectedTab === 'greenTab' && <Text>green tab</Text>}
-          </TabBar.Item>
-          <TabBar.Item
-            icon={require('./assets/images/explore.png')}
-            selectedIcon={require('./assets/images/explore.png')}
-            title="My"
-            selected={this.state.selectedTab === 'yellowTab'}
-            onPress={() => this.onChangeTab('yellowTab')}
-          >
-            {this.state.selectedTab === 'yellowTab' && <Text>yellow tab</Text>}
-          </TabBar.Item>
+          {this.renderTabBarItem()}
         </TabBar>
       </Provider>
       
