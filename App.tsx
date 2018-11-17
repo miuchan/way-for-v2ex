@@ -66,9 +66,12 @@ export default class App extends Component<State> {
         selected={this.state.selectedTab === item.tabName}
         onPress={() => this.onChangeTab(item.tabName)}
       >
-        {this.state.selectedTab === '最新' && <LatestPage />}
-        {this.state.selectedTab === '热门' && <HotPage />}
-        {this.state.selectedTab === '我的' && <MePage />}
+        <View style={{ height: '100%', width: '100%'}}>
+          {this.state.selectedTab === '探索' && <ExplorePage />}          
+          {this.state.selectedTab === '最新' && <LatestPage />}
+          {this.state.selectedTab === '热门' && <HotPage />}
+          {this.state.selectedTab === '我的' && <MePage />}
+        </View>
       </TabBar.Item>
       )
     )
@@ -78,15 +81,8 @@ export default class App extends Component<State> {
 
     return (
       <Provider {...store}>
-        <View style={{ flex: 1 }}>
-          {this.state.selectedTab === '探索' && <ExplorePage />}          
-          <TabBar>
-            {this.renderTabBarItem()}
-          </TabBar>
-        </View>
-        
+        <TabBar>{this.renderTabBarItem()}</TabBar>
       </Provider>
-      
     )
   }
 }
