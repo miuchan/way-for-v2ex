@@ -24,6 +24,7 @@ export default class HotPage extends Component<Props> {
           title={{ title: '热门' }}
         />
         <SubjectList 
+          refreshing={this.props.subjectStore.isFetching}
           subjects={this.props.subjectStore.hotSubjectList}
           onRefresh={this.props.subjectStore.getHotSubjectList}/>
       </View>

@@ -6,16 +6,17 @@ export interface subjectList {
 }
 
 class SubjectStore {
-  @observable isFetching = false
+  @observable isFetching: boolean = false
   @observable hotSubjectList: subjectList = []
   @observable latestSubjectList: subjectList = []
 
   @action
   async getHotSubjectList() {
     if(this.isFetching) return
+    this.isFetching = true
     const { data } = await api.getHotSubjectList()
     this.hotSubjectList = data
-    console.log(data)
+    this.isFetching = false
   }
 
   @action
@@ -23,7 +24,7 @@ class SubjectStore {
     if(this.isFetching) return
     const { data } = await api.getLatestSubjectList()
     this.latestSubjectList = data
-    console.log(data)
+    this.isFetching = false
   }
 
 }

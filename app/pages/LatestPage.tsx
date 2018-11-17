@@ -24,8 +24,9 @@ export default class LatestPage extends Component<Props> {
           title={{ title: '最新' }}
         />
         <SubjectList 
+        refreshing={this.props.subjectStore.isFetching}
         subjects={this.props.subjectStore.latestSubjectList}
-        onRefresh={this.props.subjectStore.getHotSubjectList}/>
+        onRefresh={this.props.subjectStore.getLatestSubjectList}/>
       </View>
     )
   }
