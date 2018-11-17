@@ -3,6 +3,7 @@ import { View, Text } from 'react-native'
 import { observer, inject } from 'mobx-react'
 import { Tabs } from 'antd-mobile-rn'
 import NavigationBar from 'react-native-navbar'
+import SubjectList from '../components/SubjectList'
 
 type Props = {
   subjectStore: any
@@ -40,11 +41,12 @@ class ExplorePage extends Component<Props> {
       backgroundColor: '#fff',
     } as any
 
-    return tabs.map(tab => <View 
-      style={style}
-      key={tab.name}>
-      <Text>Content of {tab.title}</Text>
-    </View>)
+    return tabs.map((tab) => <View key={tab.name} style={{ width: '100%', flex: 1, alignItems: 'center', backgroundColor: '#F5F5F5' }}>
+    <SubjectList 
+      refreshing={this.props.subjectStore.isFetching}
+      subjects={this.props.subjectStore.hotSubjectList}
+      onRefresh={this.props.subjectStore.getHotSubjectList}/>
+  </View>)
   }
 
   render() {
